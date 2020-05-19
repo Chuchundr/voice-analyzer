@@ -1,6 +1,10 @@
 from openpyxl import load_workbook
+from openpyxl.styles import Font
 
 WORKBOOK_NAME = 'FLM Uzmobile Список БС 1000 new.xlsx'
+
+font = Font(name='Times New Roman')
+
 
 class ExcelClass:
     def __init__(self):

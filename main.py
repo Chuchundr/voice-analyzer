@@ -19,25 +19,34 @@ def say():
         rcgnzr.adjust_for_ambient_noise(source)
         audio = rcgnzr.listen(source)
     text = rcgnzr.recognize_google(audio, language='ru-RU', )
-    return text
+    return text.lower()
 
 
 while True:
     try:
         print('Говори')
-        words = say()
-        print('Ты сказал ' + words)
-        if words.lower() == 'витаминка':
-            print('Что писать?')
-            data = say().split(' ')
-            lower_func = lambda x: x.lower()
-            data = list(map(lower_func, data))
-            print(data)
+        text = say()
+        print('Ты сказал ' + text)
+        if text == '1':
+            print('Сайт айди')
+            text = say().split()
+            print(text)
             for key, value in json_dump['a']['cities'].items():
-                if key in data:
-                    data.pop(data.index(key))
-                    xlsx.write_into_cell(1, xlsx.sheet.max_row, str(value + ''.join(data)))
-                    print(value)
+                if key in text:
+                    text.pop(text.index(key))
+                    full_text = str(value + ''.join(text))
+                    xlsx.write_into_cell(1, xlsx.sheet.max_row+1, full_text)
+                    print(full_text)
+        if text == '3':
+            print('Дата')
+            text = say()
+            xlsx.write_into_cell(3, xlsx.sheet.max_row, text)
+            print(text)
+        if text == '6':
+            print('Имя')
+            text = say()
+            xlsx.write_into_cell(6, xlsx.sheet.max_row, text.capitalize())
+            print(text.capitalize())
     except sr.UnknownValueError:
         print("Не понял")
     except sr.RequestError as e:
