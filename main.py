@@ -38,7 +38,8 @@ while True:
                     full_text = str(value + ''.join(text))
                     xlsx.write_into_cell(1, xlsx.sheet.max_row+1, full_text)
                     print(full_text)
-                    xlsx.write_into_cell(3, xlsx.sheet.max_row, date.today().strftime("%d.%m.%Y"))
+                    for i in [3, 9]:
+                        xlsx.write_into_cell(i, xlsx.sheet.max_row, date.today().strftime("%d.%m.%Y"))
         if text == '6':
             print('Имя')
             text = say()
@@ -50,8 +51,8 @@ while True:
             xlsx.write_into_cell(9, xlsx.sheet.max_row, text)
             print(text)
         if text == 'удали':
-            text = ''.join(say().split()).capitalize()
-            print(text)
+            print('Что удалить?')
+            text = say()
             xlsx.delete(text)
             print('удалил ' + text)
     except sr.UnknownValueError:
