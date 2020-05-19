@@ -39,7 +39,7 @@ while True:
                     xlsx.write_into_cell(1, xlsx.sheet.max_row+1, full_text)
                     print(full_text)
                     for i in [3, 9]:
-                        xlsx.write_into_cell(i, xlsx.sheet.max_row, date.today().strftime("%d.%m.%Y"))
+                        xlsx.write_into_cell(column=i, row=xlsx.sheet.max_row, text=.today().strftime("%d.%m.%Y"))
         if text == '6':
             print('Имя')
             text = say()
