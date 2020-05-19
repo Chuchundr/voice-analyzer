@@ -2,6 +2,7 @@
 import json
 import os
 import speech_recognition as sr
+from datetime import date
 from excel import ExcelClass
 
 
@@ -37,16 +38,22 @@ while True:
                     full_text = str(value + ''.join(text))
                     xlsx.write_into_cell(1, xlsx.sheet.max_row+1, full_text)
                     print(full_text)
-        if text == '3':
-            print('Дата')
-            text = say()
-            xlsx.write_into_cell(3, xlsx.sheet.max_row, text)
-            print(text)
+                    xlsx.write_into_cell(3, xlsx.sheet.max_row, date.today().strftime("%d.%m.%Y"))
         if text == '6':
             print('Имя')
             text = say()
             xlsx.write_into_cell(6, xlsx.sheet.max_row, text.capitalize())
             print(text.capitalize())
+        if text == '9':
+            print('Время начала')
+            text = say()
+            xlsx.write_into_cell(9, xlsx.sheet.max_row, text)
+            print(text)
+        if text == 'удали':
+            text = ''.join(say().split()).capitalize()
+            print(text)
+            xlsx.delete(text)
+            print('удалил ' + text)
     except sr.UnknownValueError:
         print("Не понял")
     except sr.RequestError as e:

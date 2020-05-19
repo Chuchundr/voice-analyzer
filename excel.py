@@ -15,3 +15,12 @@ class ExcelClass:
         mycell = self.sheet.cell(row, column)
         mycell.value = text
         self.wb.save(WORKBOOK_NAME)
+
+    def delete(self, txt):
+        txt = int(txt)
+        try:
+            mycell = self.sheet.cell(row=self.sheet.max_row, column=txt)
+            mycell.value = None
+            self.wb.save(WORKBOOK_NAME)
+        except TypeError:
+            print('Повторите')
